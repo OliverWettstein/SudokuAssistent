@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("SudokuAssisten")]
+[assembly: AssemblyTitle("sudoku_assistent_002")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("SudokuAssisten")]
-[assembly: AssemblyCopyright("Copyright © HP Inc. 2022")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("sudoku_assistent_002")]
+[assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("ec04e4dc-1414-4d4e-ae1a-392d9bbd4c36")]
+[assembly: Guid("8e8f7388-0d9a-4a54-8221-2f936caaa6fe")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //

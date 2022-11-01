@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SudokuAssisten
+namespace sudoku_assistent_002
 {
     static class Program
     {

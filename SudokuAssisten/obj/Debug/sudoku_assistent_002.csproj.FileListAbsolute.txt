@@ -1,0 +1,20 @@
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\bin\Debug\sudoku_assistent_002.exe.config
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\bin\Debug\sudoku_assistent_002.exe
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\bin\Debug\sudoku_assistent_002.pdb
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.csproj.AssemblyReference.cache
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.Form1.resources
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.Properties.Resources.resources
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.csproj.GenerateResource.cache
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.csproj.CoreCompileInputs.cache
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.exe
+C:\Users\leon\Desktop\Google Drive\schule\ims\3i\Informatik\Programmieren\Programme\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.pdb
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\bin\Debug\sudoku_assistent_002.exe.config
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\bin\Debug\sudoku_assistent_002.exe
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\bin\Debug\sudoku_assistent_002.pdb
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.csproj.AssemblyReference.cache
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.Form1.resources
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.Properties.Resources.resources
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.csproj.GenerateResource.cache
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.csproj.CoreCompileInputs.cache
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.exe
+C:\Users\olive_jchqhdd\Downloads\sudoku_assistent_002\sudoku_assistent_002\sudoku_assistent_002\obj\Debug\sudoku_assistent_002.pdb

@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace SudokuAssisten.Properties
+namespace sudoku_assistent_002.Properties
 {
     /// <summary>
     ///   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
@@ -43,7 +43,7 @@ namespace SudokuAssisten.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SudokuAssisten.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("sudoku_assistent_002.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

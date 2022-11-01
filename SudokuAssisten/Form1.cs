@@ -29,11 +29,13 @@ namespace sudoku_assistent_002
                 {
                     textbox.BackColor = Color.Red;
                 }
-                else if (textbox.TextLength == 1 && textbox.Enabled)
+                else if (textbox.TextLength == 1)
                 {
                     //set the value to 0 when the same value is found in textbox
                     possibles[Convert.ToInt32(textbox.Text)] = 0;
-                    textbox.BackColor = Color.LightGreen;
+                    if (!textbox.ReadOnly){
+                        textbox.BackColor = Color.LightGreen;
+                    }
                 }
                 //check if textbox is empty and then change color
                 if (textbox.Text == "")
@@ -178,7 +180,7 @@ namespace sudoku_assistent_002
                 if (box.Text != "")
                 {
                     box.BackColor = Color.DarkGray;
-                    box.Enabled = false;
+                    box.ReadOnly= true; //test
                     button1.Visible = false;
                 }
             }

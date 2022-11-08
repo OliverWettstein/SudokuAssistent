@@ -33,7 +33,7 @@ namespace sudoku_assistent_002
                 {
                     //set the value to 0 when the same value is found in textbox
                     possibles[Convert.ToInt32(textbox.Text)] = 0;
-                    if (!textbox.ReadOnly){
+                    if (textbox.Enabled){
                         textbox.BackColor = Color.LightGreen;
                     }
                 }
@@ -180,7 +180,7 @@ namespace sudoku_assistent_002
                 if (box.Text != "")
                 {
                     box.BackColor = Color.DarkGray;
-                    box.ReadOnly= true; //test
+                    box.Enabled= false; //test
                     button1.Visible = false;
                 }
             }

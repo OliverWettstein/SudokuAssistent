@@ -19,26 +19,17 @@ namespace sudoku_assistent_002
             InitializeComponent();
         }
 
-        int[] last_possibles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
         public int[] Check_textbox(TextBox textbox, string type, int num, int[] possibles, bool last)
         {
-            if (textbox.Text == "" && last == true)
-            {
-                for (int i = 0; i < 9; i++)
-                {
-                    last_possibles[i] = possibles[i];
-                }
-            }
             //check if textbox_check is in the same column, line or box as the current textbox
             if (Convert.ToString(textbox.Name[num]) == type && textbox.Text != "")
             {
                 //check if the input is incorrect
-                if (textbox.TextLength > 1 || !last_possibles.Contains(Convert.ToInt32(textbox.Text)))
+                if (textbox.TextLength > 1)
                 {
                     textbox.BackColor = Color.Red;
                 }
-                if (textbox.TextLength == 1 && last_possibles.Contains(Convert.ToInt32(textbox.Text)))
+                if (textbox.TextLength == 1)
                 {
                     //set the value to 0 when the same value is found in textbox
                     possibles[Convert.ToInt32(textbox.Text)] = 0;
@@ -47,7 +38,7 @@ namespace sudoku_assistent_002
                         textbox.BackColor = Color.LightGreen;
                     }
                 }
-
+                check_current_input(textbox);
                 
                 //check if textbox is empty and then change color
                 if (textbox.Text == "")
@@ -56,6 +47,23 @@ namespace sudoku_assistent_002
                 }
             }
             return possibles;
+        }
+
+        public void check_current_input(TextBox textbox)
+        {
+            char current_block = textbox.Name[1];
+            char current_line = textbox.Name[2];
+            char current_column = textbox.Name[3];
+            foreach(TextBox box in textBoxListe)
+            {
+                if (box.Name[1] == current_block || box.Name[2] == current_line || box.Name[3] == current_column)
+                {
+                    if (box.Text == textbox.Text && box.Text != "" && box.Name != textbox.Name && textBoxListe[last_focused_textbox].Name == textbox.Name)
+                    {
+                        textbox.BackColor = Color.Red;
+                    }
+                }
+            }
         }
         
         public void Show_popup(TextBox box)
@@ -86,6 +94,7 @@ namespace sudoku_assistent_002
                     possibles = Check_textbox(textbox, Convert.ToString(current_line), 2, possibles, false);
                     possibles = Check_textbox(textbox, Convert.ToString(current_column), 3, possibles, false);
                 }
+                check_current_input(textBoxListe[last_focused_textbox]);
             }
             else
             {
@@ -159,6 +168,8 @@ namespace sudoku_assistent_002
             this.ActiveControl = null;
         }
 
+        int last_focused_textbox = 0;
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -175,6 +186,7 @@ namespace sudoku_assistent_002
             {
                 if (textBoxListe[i].ContainsFocus == true)
                 {
+                    last_focused_textbox = i;
                     //check if the written number is possible
                     Show_popup(textBoxListe[i]);
                 }

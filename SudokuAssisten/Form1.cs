@@ -13,6 +13,7 @@ namespace sudoku_assistent_002
     public partial class Form1 : Form
     {
         List<TextBox> textBoxListe = new List<TextBox>();
+        //list of booleans which belong to the textbox with same index in textboxListe
         List<Boolean> boollist = new List<Boolean>();
         public Form1()
         {
@@ -27,7 +28,7 @@ namespace sudoku_assistent_002
                 //check if the input is incorrect
                 if (textbox.TextLength > 1)
                 {
-                    textbox.BackColor = Color.Red;
+                    boollist[last_focused_textbox] = false;
                 }
                 if (textbox.TextLength == 1)
                 {
@@ -35,10 +36,9 @@ namespace sudoku_assistent_002
                     possibles[Convert.ToInt32(textbox.Text)] = 0;
                     if (textbox.Enabled)
                     {
-                        textbox.BackColor = Color.LightGreen;
+                        boollist[last_focused_textbox] = true;
                     }
                 }
-                check_current_input(textbox);
                 
                 //check if textbox is empty and then change color
                 if (textbox.Text == "")
@@ -54,13 +54,14 @@ namespace sudoku_assistent_002
             char current_block = textbox.Name[1];
             char current_line = textbox.Name[2];
             char current_column = textbox.Name[3];
+            //check if the input of the current textbox is possible and sets the bool in boollist
             foreach(TextBox box in textBoxListe)
             {
                 if (box.Name[1] == current_block || box.Name[2] == current_line || box.Name[3] == current_column)
                 {
                     if (box.Text == textbox.Text && box.Text != "" && box.Name != textbox.Name && textBoxListe[last_focused_textbox].Name == textbox.Name)
                     {
-                        textbox.BackColor = Color.Red;
+                        boollist[last_focused_textbox] = false;
                     }
                 }
             }
@@ -83,6 +84,7 @@ namespace sudoku_assistent_002
             char current_line = box.Name[2];
             char current_column = box.Name[3];
             int n;
+
             //check possibilities
             if (int.TryParse(box.Text, out n) || box.Text == "")
             {
@@ -101,6 +103,19 @@ namespace sudoku_assistent_002
                 box.BackColor = Color.Red;
             }
 
+            //check if the boolean which belongs to a textbox is true, then change textboxcolor
+            for (int i = 0; i < 81; i++)
+            {
+                if (boollist[i] == false)
+                {
+                    textBoxListe[i].BackColor = Color.Red;
+                }
+                else if (boollist[i] == true && textBoxListe[i].Text != "")
+                {
+                    textBoxListe[i].BackColor = Color.LightGreen;
+                }
+            }
+
             //get every char from possibles if its not 0
             string labeltext = "";
             int pos = 0;
@@ -109,6 +124,7 @@ namespace sudoku_assistent_002
             {
                 if (possibles[i] != 0)
                 {
+                    //generate labeltext
                     labeltext += possibles[i] + "; ";
                     pos++;
                     temppos = possibles[i];
@@ -117,6 +133,8 @@ namespace sudoku_assistent_002
 
             //write labeltext in label
             label1.Text = labeltext;
+            
+            //restore possibles
             for (int i = 0; i < 10; i++)
             {
                 possibles[i] = i;
@@ -127,10 +145,15 @@ namespace sudoku_assistent_002
             //Autofill
             if (pos == 1)
             {
-                box.Text = Convert.ToString(temppos);
-                box.BackColor = Color.Yellow;
+                //autofill if the last Textbox is focused
+                if (last_last_focused_textbox != last_focused_textbox)
+                {
+                    box.Text = Convert.ToString(temppos);
+                }
+                
             }
         }
+
         public void Hide_popup()
         {
             this.ActiveControl = null;
@@ -139,6 +162,13 @@ namespace sudoku_assistent_002
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
+            //fill boollist with true booleans
+            for (int i = 0; i < 81; i++)
+            {
+                Boolean b = new Boolean();
+                b = true;
+                boollist.Add(b);
+            }
             //generate 9 x 9 textboxes
             int box = 0;
             //9 lines of textboxes
@@ -178,8 +208,8 @@ namespace sudoku_assistent_002
             this.ActiveControl = null;
         }
 
+        int last_last_focused_textbox = 0;
         int last_focused_textbox = 0;
-
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -196,6 +226,7 @@ namespace sudoku_assistent_002
             {
                 if (textBoxListe[i].ContainsFocus == true)
                 {
+                    last_last_focused_textbox = last_focused_textbox;
                     last_focused_textbox = i;
                     //check if the written number is possible
                     Show_popup(textBoxListe[i]);

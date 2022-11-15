@@ -71,7 +71,7 @@ namespace sudoku_assistent_002
             //possible numbers that can fit in the textbox
             int[] possibles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            
+
 
             //set position of the popup-window
             label1.Left = box.Left + box.Width + 1;
@@ -103,11 +103,15 @@ namespace sudoku_assistent_002
 
             //get every char from possibles if its not 0
             string labeltext = "";
+            int pos = 0;
+            int temppos = 0;
             for (int i = 0; i < 10; i++)
             {
                 if (possibles[i] != 0)
                 {
                     labeltext += possibles[i] + "; ";
+                    pos++;
+                    temppos = possibles[i];
                 }
             }
 
@@ -120,6 +124,12 @@ namespace sudoku_assistent_002
 
             //show the label
             label1.Show();
+            //Autofill
+            if (pos == 1)
+            {
+                box.Text = Convert.ToString(temppos);
+                box.BackColor = Color.Yellow;
+            }
         }
         public void Hide_popup()
         {
@@ -201,7 +211,7 @@ namespace sudoku_assistent_002
                 if (box.Text != "")
                 {
                     box.BackColor = Color.DarkGray;
-                    box.Enabled= false; //test
+                    box.ReadOnly = true; //test
                     button1.Visible = false;
                 }
             }

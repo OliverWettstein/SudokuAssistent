@@ -39,7 +39,7 @@ namespace sudoku_assistent_002
                         boollist[last_focused_textbox] = true;
                     }
                 }
-                
+
                 //check if textbox is empty and then change color
                 if (textbox.Text == "")
                 {
@@ -55,7 +55,7 @@ namespace sudoku_assistent_002
             char current_line = textbox.Name[2];
             char current_column = textbox.Name[3];
             //check if the input of the current textbox is possible and sets the bool in boollist
-            foreach(TextBox box in textBoxListe)
+            foreach (TextBox box in textBoxListe)
             {
                 if (box.Name[1] == current_block || box.Name[2] == current_line || box.Name[3] == current_column)
                 {
@@ -66,7 +66,7 @@ namespace sudoku_assistent_002
                 }
             }
         }
-        
+
         public void Show_popup(TextBox box)
         {
             //possible numbers that can fit in the textbox
@@ -133,7 +133,7 @@ namespace sudoku_assistent_002
 
             //write labeltext in label
             label1.Text = labeltext;
-            
+
             //restore possibles
             for (int i = 0; i < 10; i++)
             {
@@ -150,7 +150,7 @@ namespace sudoku_assistent_002
                 {
                     box.Text = Convert.ToString(temppos);
                 }
-                
+
             }
         }
 

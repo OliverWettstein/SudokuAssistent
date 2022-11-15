@@ -65,8 +65,8 @@ namespace sudoku_assistent_002
                 }
             }
         }
-        
-        public void Show_popup(TextBox box)
+
+        public void Show_popup(TextBox box, bool bo)
         {
             //possible numbers that can fit in the textbox
             int[] possibles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -122,14 +122,20 @@ namespace sudoku_assistent_002
                 possibles[i] = i;
             }
 
-            //show the label
-            label1.Show();
-            //Autofill
-            if (pos == 1)
+            if (bo)
             {
-                box.Text = Convert.ToString(temppos);
-                box.BackColor = Color.Yellow;
+                if (pos == 1)
+                {
+                    box.Text = Convert.ToString(temppos);
+                    box.BackColor = Color.Yellow;
+                }
             }
+            else
+            {
+                label1.Show();
+            }
+
+            
         }
         public void Hide_popup()
         {
@@ -196,9 +202,10 @@ namespace sudoku_assistent_002
             {
                 if (textBoxListe[i].ContainsFocus == true)
                 {
+                    
                     last_focused_textbox = i;
                     //check if the written number is possible
-                    Show_popup(textBoxListe[i]);
+                    Show_popup(textBoxListe[i],false);
                 }
             }
         }
@@ -240,8 +247,7 @@ namespace sudoku_assistent_002
             {
                 if (textBoxListe[i].TextLength != 1)
                 {
-                    Show_popup(textBoxListe[i]);
-                    Hide_popup();
+                    Show_popup(textBoxListe[i], true);
                 }
                 
             }

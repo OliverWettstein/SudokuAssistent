@@ -19,7 +19,7 @@ namespace sudoku_assistent_002
             InitializeComponent();
         }
 
-        int[] last_possibles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] last_possibles = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         public int[] Check_textbox(TextBox textbox, string type, int num, int[] possibles, bool last)
         {
@@ -48,7 +48,7 @@ namespace sudoku_assistent_002
                     }
                 }
 
-                
+
                 //check if textbox is empty and then change color
                 if (textbox.Text == "")
                 {
@@ -57,13 +57,13 @@ namespace sudoku_assistent_002
             }
             return possibles;
         }
-        
+
         public void Show_popup(TextBox box)
         {
             //possible numbers that can fit in the textbox
             int[] possibles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            
+
 
             //set position of the popup-window
             label1.Left = box.Left + box.Width + 1;
@@ -94,11 +94,15 @@ namespace sudoku_assistent_002
 
             //get every char from possibles if its not 0
             string labeltext = "";
+            int pos = 0;
+            int temppos = 0;
             for (int i = 0; i < 10; i++)
             {
                 if (possibles[i] != 0)
                 {
                     labeltext += possibles[i] + "; ";
+                    pos++;
+                    temppos = possibles[i];
                 }
             }
 
@@ -111,6 +115,12 @@ namespace sudoku_assistent_002
 
             //show the label
             label1.Show();
+            //Autofill
+            if (pos == 1)
+            {
+                box.Text = Convert.ToString(temppos);
+                box.BackColor = Color.Yellow;
+            }
         }
         public void Hide_popup()
         {
@@ -175,8 +185,11 @@ namespace sudoku_assistent_002
             {
                 if (textBoxListe[i].ContainsFocus == true)
                 {
-                    //check if the written number is possible
-                    Show_popup(textBoxListe[i]);
+                    if (textBoxListe[i].TextLength != 1)
+                    {
+                        Show_popup(textBoxListe[i]);
+                    }
+
                 }
             }
         }
@@ -189,7 +202,7 @@ namespace sudoku_assistent_002
                 if (box.Text != "")
                 {
                     box.BackColor = Color.DarkGray;
-                    box.Enabled= false; //test
+                    box.ReadOnly = true; //test
                     button1.Visible = false;
                 }
             }

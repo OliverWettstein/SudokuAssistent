@@ -224,5 +224,19 @@ namespace sudoku_assistent_002
                 button1.Visible = true;
             }
         }
+
+        private void hans_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 81; i++)
+            {
+                if (textBoxListe[i].TextLength != 1)
+                {
+                    Show_popup(textBoxListe[i]);
+                    Hide_popup();
+                }
+                
+            }
+                
+        }
     }
 }

@@ -145,15 +145,10 @@ namespace sudoku_assistent_002
             //Autofill
             if (pos == 1)
             {
-                //autofill if the last Textbox is focused
-                if (last_last_focused_textbox != last_focused_textbox)
-                {
-                    box.Text = Convert.ToString(temppos);
-                }
-
+                box.Text = Convert.ToString(temppos);
+                box.BackColor = Color.Yellow;
             }
         }
-
         public void Hide_popup()
         {
             this.ActiveControl = null;
@@ -226,10 +221,9 @@ namespace sudoku_assistent_002
             {
                 if (textBoxListe[i].ContainsFocus == true)
                 {
-                    last_last_focused_textbox = last_focused_textbox;
                     last_focused_textbox = i;
                     //check if the written number is possible
-                    Show_popup(textBoxListe[i]);
+                    Show_popup(textBoxListe[i],false);
                 }
             }
         }
@@ -263,6 +257,19 @@ namespace sudoku_assistent_002
                 box.Enabled = true;
                 button1.Visible = true;
             }
+        }
+
+        private void hans_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 81; i++)
+            {
+                if (textBoxListe[i].TextLength != 1)
+                {
+                    Show_popup(textBoxListe[i], true);
+                }
+                
+            }
+                
         }
     }
 }

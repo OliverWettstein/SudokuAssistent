@@ -80,7 +80,6 @@ namespace sudoku_assistent_002
             this.button2.TabIndex = 8;
             this.button2.Text = "Hilfe";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.hans_Click);
             // 
             // Form1
             // 

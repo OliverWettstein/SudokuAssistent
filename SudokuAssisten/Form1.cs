@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.IO;
+
 
 namespace sudoku_assistent_002
 {
@@ -138,14 +141,14 @@ namespace sudoku_assistent_002
             {
                 possibles[i] = i;
             }
-            if (boollist[last_focused_box] != true || textBoxListe[last_focused_box].BackColor == Color.LightGreen)
+            //show the label
+            if (textBoxListe[last_focused_box].Text != "")
             {
-                //show the label
-                label1.Show();
+                Hide_popup();
             }
             else
             {
-                Hide_popup();
+                label1.Show();
             }
         }
         public void Hide_popup()
@@ -326,6 +329,73 @@ namespace sudoku_assistent_002
         private void button5_Click(object sender, EventArgs e)
         {
             Generate();
+        }
+
+        private void buttonSpeichern_Click_1(object sender, EventArgs e)
+        {
+            XmlWriter oXmlWriter = null;
+            XmlWriterSettings oXmlWriterSettings = new XmlWriterSettings();
+
+            oXmlWriterSettings.Indent = true;
+            oXmlWriterSettings.IndentChars = "  ";
+            oXmlWriterSettings.NewLineChars = "\r\n";
+            oXmlWriter = XmlWriter.Create("savegame.xml", oXmlWriterSettings);
+            oXmlWriter.WriteStartDocument(true);
+            oXmlWriter.WriteStartElement("textboxes");
+            foreach (TextBox forElement in textBoxListe)
+            {
+                TextBox textboxSave = forElement;
+                oXmlWriter.WriteStartElement("textbox");
+                oXmlWriter.WriteAttributeString("enabled", textboxSave.Enabled.ToString());
+                oXmlWriter.WriteAttributeString("color", textboxSave.BackColor.ToArgb().ToString());
+                oXmlWriter.WriteAttributeString("number", textboxSave.Text);
+                oXmlWriter.WriteAttributeString("name", textboxSave.Name);
+                oXmlWriter.WriteEndElement();
+            }
+            
+            oXmlWriter.WriteStartElement("booleans");
+            foreach (bool bools in boollist)
+            {
+                bool boolsave = bools;
+                oXmlWriter.WriteStartElement("bool");
+                oXmlWriter.WriteAttributeString("bool", boolsave.ToString());
+                oXmlWriter.WriteEndElement();
+            }
+            oXmlWriter.WriteEndElement();
+            Console.WriteLine("Die XML-Datei wurde geschrieben!");
+            oXmlWriter.Close();
+        }
+
+        private void buttonLaden_Click(object sender, EventArgs e)
+        {
+            XmlReader xmlReader = XmlReader.Create("savegame.xml");
+            boollist.Clear();
+            while (xmlReader.Read())
+            {
+                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "textbox"))
+                {
+                    Console.WriteLine(xmlReader.GetAttribute("name") + ": " + xmlReader.GetAttribute("number") + ": " + xmlReader.GetAttribute("color") + ": " + xmlReader.GetAttribute("enabled"));
+                    TextBox textbox = textBoxListe.Find(x => x.Name == xmlReader.GetAttribute("name"));
+                    textbox.Name = xmlReader.GetAttribute("name");
+                    textbox.Text = xmlReader.GetAttribute("number");
+                    Int32 argb = Convert.ToInt32(xmlReader.GetAttribute("color"));
+                    Color color = Color.FromArgb(argb);
+                    textbox.BackColor = color;
+                    textbox.Enabled = Convert.ToBoolean(xmlReader.GetAttribute("enabled"));
+                    if (argb == -7278960)
+                    {
+                        textbox.Enabled = true;
+                    }
+                }
+                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "bool"))
+                {
+                    Console.WriteLine(xmlReader.GetAttribute("bool"));
+                    bool boolload = Convert.ToBoolean(xmlReader.GetAttribute("bool"));
+                    boollist.Add(boolload);
+                }
+            }
+            xmlReader.Close();
+
         }
     }
 }

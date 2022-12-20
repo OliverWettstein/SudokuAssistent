@@ -17,13 +17,15 @@ namespace sudoku_assistent_002
     {
         List<TextBox> textBoxListe = new List<TextBox>();
         List<Boolean> boollist = new List<Boolean>();
+        List<String> stringlist = new List<String>();
         public Form1()
         {
             InitializeComponent();
         }
 
-        public void Autofill(int[] possibles)
+        public void Autofill(TextBox box)
         {
+            int[] possibles = Get_Possibles(box);
             string temp = "";
             for (int i = 0; i < 10; i++)
             {
@@ -32,96 +34,36 @@ namespace sudoku_assistent_002
                     temp = temp + Convert.ToString(possibles[i]);
                 }
             }
-            if (temp.Length == 1 && last_focused_box != last_last_focused_box && textBoxListe[last_focused_box].Text == "")
+            if (temp.Length == 1 && box.Text == "")
             {
-                textBoxListe[last_focused_box].Text = temp;
+                box.Text = temp;
             }
         }
 
-        public void Check_input(int[] possibles, TextBox current_box)
+        public void TwoPossibles(TextBox box, int count)
         {
-            for (int i = 1; i < 4; i++)
+            int[] possibles = Get_Possibles(box);
+            string temp = "";
+            for (int i = 0; i < 10; i++)
             {
-                foreach (TextBox textbox in textBoxListe)
+                if (possibles[i] != 0)
                 {
-                    if (textbox.Name[i] == current_box.Name[i] && textbox.Text == current_box.Text && textbox.Name != current_box.Name)
-                    {
-                        for (int a = 0; a < 81; a++)
-                        {
-                            if (textBoxListe[a].Name == current_box.Name)
-                            {
-                                boollist[a] = false;
-                            }
-                        }
-                    }
+                    temp = temp + Convert.ToString(possibles[i]);
                 }
             }
-        }
-
-        public int[] Check_textbox(TextBox textbox, string type, int num, int[] possibles, int o)
-        {
-            //check if textbox_check is in the same column, line or box as the current textbox
-            if (Convert.ToString(textbox.Name[num]) == type && textbox.Text != "")
+            if (temp.Length == 2 && box.Text == "")
             {
-
-                //check if the input is incorrect
-                if (textbox.TextLength > 1)
-                {
-                    boollist[o] = false;
-                }
-                else if (textbox.TextLength == 1)
-                {
-                    //set the value to 0 when the same value is found in textbox
-                    possibles[Convert.ToInt32(textbox.Text)] = 0;
-                    boollist[o] = true;
-                    Check_input(possibles, textBoxListe[last_focused_box]);
-                }
-
+                stringlist[count] = "y";
             }
-            return possibles;
         }
 
         public void Show_popup(TextBox box)
         {
-            //possible numbers that can fit in the textbox
-            int[] possibles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
+            int[] possibles = Get_Possibles(box);
+            //get every char from possibles if its not 0
             //set position of the popup-window
             label1.Left = box.Left + box.Width + 1;
             label1.Top = box.Top + 3;
-
-            //get the current values
-            int n;
-            //check possibilities
-            if (int.TryParse(box.Text, out n) || box.Text == "")
-            {
-                box.BackColor = Color.White;
-                //x = line || column || box (compared with a char of current textbox)
-                for (int x = 0; x < 3; x++)
-                {
-                    //check all significant 9 textboxes either in the line or column or box
-                    for (int i = 0; i < 9; i++)
-                    {
-                        //goes through every textbox
-                        for (int o = 0; o < 81; o++)
-                        {
-                            TextBox textbox = textBoxListe[o];
-                            for (int a = 1; a < 4; a++)
-                            {
-                                possibles = Check_textbox(textbox, Convert.ToString(box.Name[a]), a, possibles, o);
-                            }
-                            int[] temppossibles = possibles;
-                            Autofill(temppossibles);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                boollist[last_focused_box] = false;
-            }
-
-            //get every char from possibles if its not 0
             string labeltext = "";
             int pos = 0;
             int temppos = 0;
@@ -151,6 +93,76 @@ namespace sudoku_assistent_002
                 label1.Show();
             }
         }
+
+        public int[] Get_Possibles(TextBox box)
+        {
+             //possible numbers that can fit in the textbox
+            int[] possibles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            //get the current values
+            int n;
+            //check possibilities
+            if (int.TryParse(box.Text, out n) && box.Text != "0" || box.Text == "")
+            {
+                //goes through every textbox
+                for (int o = 0; o < 81; o++)
+                {
+                    TextBox textbox = textBoxListe[o];
+                    for (int a = 1; a < 4; a++)
+                    {
+                        possibles = Check_textbox(textbox,Convert.ToString(box.Name[a]), a, possibles, o);
+                    }
+                }
+            }
+            else
+            {
+                boollist[last_focused_box] = false;
+            }
+            return possibles;
+        }
+
+        public int[] Check_textbox(TextBox textbox, string type, int num, int[] possibles, int o)
+        {
+            //check if textbox_check is in the same column, line or box as the current textbox
+            if (Convert.ToString(textbox.Name[num]) == type && textbox.Text != "")
+            {
+                //check if the input is incorrect
+                if (textbox.TextLength > 1)
+                {
+                    boollist[o] = false;
+                }
+                else if (textbox.TextLength == 1)
+                {
+                    //set the value to 0 when the same value is found in textbox
+                    possibles[Convert.ToInt32(textbox.Text)] = 0;
+                    boollist[o] = true;
+                    Check_input(possibles, textBoxListe[last_focused_box]);
+                }
+
+            }
+            return possibles;
+        }
+
+        public void Check_input(int[] possibles, TextBox current_box)
+        {
+            for (int i = 1; i < 4; i++)
+            {
+                foreach (TextBox textbox in textBoxListe)
+                {
+                    if (textbox.Name[i] == current_box.Name[i] && textbox.Text == current_box.Text && textbox.Name != current_box.Name)
+                    {
+                        for (int a = 0; a < 81; a++)
+                        {
+                            if (textBoxListe[a].Name == current_box.Name)
+                            {
+                                boollist[a] = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public void Hide_popup()
         {
             label1.Hide();
@@ -160,16 +172,18 @@ namespace sudoku_assistent_002
         public void Generate()
         {
             rand.Next(17, 23);
-
         }
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
             for (int i = 0; i < 81; i++)
             {
-                Boolean b = new Boolean();
+                bool b = new Boolean();
                 b = true;
                 boollist.Add(b);
+
+                string s = "x";
+                stringlist.Add(s);
             }
 
             //generate 9 x 9 textboxes
@@ -178,14 +192,14 @@ namespace sudoku_assistent_002
             for (int count = 0; count < 9; count++)
             {
                 //y coordinate of the texbox
-                int y = 30 + 28 * count;
+                int y = 70 + 28 * count;
                 //9 columns with textboxes
                 for (int i = 0; i < 9; i++)
                 {
                     //generate textbox
                     TextBox tb = new TextBox();
                     //x coordinate of the texbox
-                    int x = 84 + 31 * i;
+                    int x = 180 + 31 * i;
                     tb.Location = new Point(x, y);
                     tb.Width = 24;
 
@@ -217,9 +231,16 @@ namespace sudoku_assistent_002
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int count = 0;
             bool error = false;
             foreach (TextBox textbox in textBoxListe)
             {
+                Autofill(textbox);
+                TwoPossibles(textbox, count);
+                if (textbox.Text != "")
+                {
+                    stringlist[count] = "x";
+                }
                 if (textbox.BackColor == Color.Red)
                 {
                     error = true;
@@ -229,6 +250,7 @@ namespace sudoku_assistent_002
                 {
                     error = false;
                 }
+                count++;
             }
             if (error == true)
             {
@@ -255,10 +277,10 @@ namespace sudoku_assistent_002
             //draw helplines
             Graphics g = this.CreateGraphics();
             Pen pen = new Pen(Color.Black, 1);
-            g.DrawLine(pen, 173, 20, 173, 284);
-            g.DrawLine(pen, 266, 20, 266, 284);
-            g.DrawLine(pen, 68, 110, 370, 110);
-            g.DrawLine(pen, 68, 193, 370, 193);
+            g.DrawLine(pen, 270, 60, 270, 324);
+            g.DrawLine(pen, 362, 60, 362, 324);
+            g.DrawLine(pen, 167, 150, 462, 150);
+            g.DrawLine(pen, 167, 233, 462, 233);
 
             //check if any textbox contains focus and then shows the popup
             for (int i = 0; i < 81; i++)
@@ -279,8 +301,12 @@ namespace sudoku_assistent_002
                 {
                     textBoxListe[i].BackColor = Color.LightGreen;
                 }
+                if (stringlist[i] == "y" && textBoxListe[i].Enabled == true)
+                {
+                    textBoxListe[i].BackColor = Color.Yellow;
+                }
                 //check if textbox is empty and then change color
-                if (textBoxListe[i].Text == "")
+                if (textBoxListe[i].Text == "" && stringlist[i] != "y")
                 {
                     textBoxListe[i].BackColor = Color.White;
                 }

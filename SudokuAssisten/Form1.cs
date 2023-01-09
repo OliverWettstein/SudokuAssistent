@@ -236,7 +236,10 @@ namespace sudoku_assistent_002
             bool error = false;
             foreach (TextBox textbox in textBoxListe)
             {
-                Autofill(textbox);
+                if (checkBox1.Checked)
+                {
+                    Autofill(textbox);
+                }
                 TwoPossibles(textbox, count);
                 if (textbox.Text != "")
                 {
@@ -589,6 +592,16 @@ namespace sudoku_assistent_002
 
 
 
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
 
         }
     }

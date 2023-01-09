@@ -21,6 +21,7 @@ namespace sudoku_assistent_002
         public Form1()
         {
             InitializeComponent();
+            checkHomeFolder();
         }
 
         public void Autofill(TextBox box)
@@ -96,7 +97,7 @@ namespace sudoku_assistent_002
 
         public int[] Get_Possibles(TextBox box)
         {
-             //possible numbers that can fit in the textbox
+            //possible numbers that can fit in the textbox
             int[] possibles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             //get the current values
@@ -110,7 +111,7 @@ namespace sudoku_assistent_002
                     TextBox textbox = textBoxListe[o];
                     for (int a = 1; a < 4; a++)
                     {
-                        possibles = Check_textbox(textbox,Convert.ToString(box.Name[a]), a, possibles, o);
+                        possibles = Check_textbox(textbox, Convert.ToString(box.Name[a]), a, possibles, o);
                     }
                 }
             }
@@ -359,69 +360,237 @@ namespace sudoku_assistent_002
 
         private void buttonSpeichern_Click_1(object sender, EventArgs e)
         {
-            XmlWriter oXmlWriter = null;
-            XmlWriterSettings oXmlWriterSettings = new XmlWriterSettings();
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            oXmlWriterSettings.Indent = true;
-            oXmlWriterSettings.IndentChars = "  ";
-            oXmlWriterSettings.NewLineChars = "\r\n";
-            oXmlWriter = XmlWriter.Create("savegame.xml", oXmlWriterSettings);
-            oXmlWriter.WriteStartDocument(true);
-            oXmlWriter.WriteStartElement("textboxes");
-            foreach (TextBox forElement in textBoxListe)
+            saveFileDialog1.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent\\savegames");
+            saveFileDialog1.Filter = "xml files (*.xml)|*.xml";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                TextBox textboxSave = forElement;
-                oXmlWriter.WriteStartElement("textbox");
-                oXmlWriter.WriteAttributeString("enabled", textboxSave.Enabled.ToString());
-                oXmlWriter.WriteAttributeString("color", textboxSave.BackColor.ToArgb().ToString());
-                oXmlWriter.WriteAttributeString("number", textboxSave.Text);
-                oXmlWriter.WriteAttributeString("name", textboxSave.Name);
+                
+                XmlWriter oXmlWriter = null;
+                XmlWriterSettings oXmlWriterSettings = new XmlWriterSettings();
+
+                oXmlWriterSettings.Indent = true;
+                oXmlWriterSettings.IndentChars = "  ";
+                oXmlWriterSettings.NewLineChars = "\r\n";
+                oXmlWriter = XmlWriter.Create(saveFileDialog1.FileName, oXmlWriterSettings);
+                oXmlWriter.WriteStartDocument(true);
+                oXmlWriter.WriteStartElement("textboxes");
+                foreach (TextBox forElement in textBoxListe)
+                {
+                    TextBox textboxSave = forElement;
+                    oXmlWriter.WriteStartElement("textbox");
+                    oXmlWriter.WriteAttributeString("enabled", textboxSave.Enabled.ToString());
+                    oXmlWriter.WriteAttributeString("color", textboxSave.BackColor.ToArgb().ToString());
+                    oXmlWriter.WriteAttributeString("number", textboxSave.Text);
+                    oXmlWriter.WriteAttributeString("name", textboxSave.Name);
+                    oXmlWriter.WriteEndElement();
+                }
+
+                oXmlWriter.WriteStartElement("booleans");
+                foreach (bool bools in boollist)
+                {
+                    bool boolsave = bools;
+                    oXmlWriter.WriteStartElement("bool");
+                    oXmlWriter.WriteAttributeString("bool", boolsave.ToString());
+                    oXmlWriter.WriteEndElement();
+                }
                 oXmlWriter.WriteEndElement();
+                Console.WriteLine("Die XML-Datei wurde geschrieben!");
+                oXmlWriter.Close();
+                   
+                
             }
-            
-            oXmlWriter.WriteStartElement("booleans");
-            foreach (bool bools in boollist)
-            {
-                bool boolsave = bools;
-                oXmlWriter.WriteStartElement("bool");
-                oXmlWriter.WriteAttributeString("bool", boolsave.ToString());
-                oXmlWriter.WriteEndElement();
-            }
-            oXmlWriter.WriteEndElement();
-            Console.WriteLine("Die XML-Datei wurde geschrieben!");
-            oXmlWriter.Close();
         }
 
         private void buttonLaden_Click(object sender, EventArgs e)
-        {
-            XmlReader xmlReader = XmlReader.Create("savegame.xml");
-            boollist.Clear();
-            while (xmlReader.Read())
+        {//Get File
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "textbox"))
+                openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent\\savegames");
+                openFileDialog.Filter = "xml files (*.xml)|*.xml";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Console.WriteLine(xmlReader.GetAttribute("name") + ": " + xmlReader.GetAttribute("number") + ": " + xmlReader.GetAttribute("color") + ": " + xmlReader.GetAttribute("enabled"));
-                    TextBox textbox = textBoxListe.Find(x => x.Name == xmlReader.GetAttribute("name"));
-                    textbox.Name = xmlReader.GetAttribute("name");
-                    textbox.Text = xmlReader.GetAttribute("number");
-                    Int32 argb = Convert.ToInt32(xmlReader.GetAttribute("color"));
-                    Color color = Color.FromArgb(argb);
-                    textbox.BackColor = color;
-                    textbox.Enabled = Convert.ToBoolean(xmlReader.GetAttribute("enabled"));
-                    if (argb == -7278960)
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+                    //ReadFile
+                    XmlReader xmlReader = XmlReader.Create(filePath);
+                    boollist.Clear();
+                    while (xmlReader.Read())
                     {
-                        textbox.Enabled = true;
+                        if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "textbox"))
+                        {
+                            Console.WriteLine(xmlReader.GetAttribute("name") + ": " + xmlReader.GetAttribute("number") + ": " + xmlReader.GetAttribute("color") + ": " + xmlReader.GetAttribute("enabled"));
+                            TextBox textbox = textBoxListe.Find(x => x.Name == xmlReader.GetAttribute("name"));
+                            textbox.Name = xmlReader.GetAttribute("name");
+                            textbox.Text = xmlReader.GetAttribute("number");
+                            Int32 argb = Convert.ToInt32(xmlReader.GetAttribute("color"));
+                            Color color = Color.FromArgb(argb);
+                            textbox.BackColor = color;
+                            textbox.Enabled = Convert.ToBoolean(xmlReader.GetAttribute("enabled"));
+                            if (argb == -7278960)
+                            {
+                                textbox.Enabled = true;
+                            }
+                        }
+                        if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "bool"))
+                        {
+                            Console.WriteLine(xmlReader.GetAttribute("bool"));
+                            bool boolload = Convert.ToBoolean(xmlReader.GetAttribute("bool"));
+                            boollist.Add(boolload);
+                        }
                     }
-                }
-                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "bool"))
-                {
-                    Console.WriteLine(xmlReader.GetAttribute("bool"));
-                    bool boolload = Convert.ToBoolean(xmlReader.GetAttribute("bool"));
-                    boollist.Add(boolload);
+                    xmlReader.Close();
                 }
             }
-            xmlReader.Close();
+        }
+
+        private void buttonVorlageSpeichern_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent\\muster");
+            saveFileDialog1.Filter = "xml files (*.xml)|*.xml";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                XmlWriter oXmlWriter = null;
+                XmlWriterSettings oXmlWriterSettings = new XmlWriterSettings();
+
+                oXmlWriterSettings.Indent = true;
+                oXmlWriterSettings.IndentChars = "  ";
+                oXmlWriterSettings.NewLineChars = "\r\n";
+                oXmlWriter = XmlWriter.Create(saveFileDialog1.FileName, oXmlWriterSettings);
+                oXmlWriter.WriteStartDocument(true);
+                oXmlWriter.WriteStartElement("textboxes");
+                foreach (TextBox forElement in textBoxListe)
+                {
+                    TextBox textboxSave = forElement;
+                    oXmlWriter.WriteStartElement("textbox");
+                    oXmlWriter.WriteAttributeString("enabled", textboxSave.Enabled.ToString());
+                    oXmlWriter.WriteAttributeString("color", textboxSave.BackColor.ToArgb().ToString());
+                    oXmlWriter.WriteAttributeString("number", textboxSave.Text);
+                    oXmlWriter.WriteAttributeString("name", textboxSave.Name);
+                    oXmlWriter.WriteEndElement();
+                }
+
+                oXmlWriter.WriteStartElement("booleans");
+                foreach (bool bools in boollist)
+                {
+                    bool boolsave = bools;
+                    oXmlWriter.WriteStartElement("bool");
+                    oXmlWriter.WriteAttributeString("bool", boolsave.ToString());
+                    oXmlWriter.WriteEndElement();
+                }
+                oXmlWriter.WriteEndElement();
+                Console.WriteLine("Die XML-Datei wurde geschrieben!");
+                oXmlWriter.Close();
+
+
+            }
+        }
+
+        private void buttonVorlageLaden_Click(object sender, EventArgs e)
+        {
+            //Get File
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent\\muster");
+                openFileDialog.Filter = "xml files (*.xml)|*.xml";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+                    //ReadFile
+                    XmlReader xmlReader = XmlReader.Create(filePath);
+                    boollist.Clear();
+                    while (xmlReader.Read())
+                    {
+                        if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "textbox"))
+                        {
+                            Console.WriteLine(xmlReader.GetAttribute("name") + ": " + xmlReader.GetAttribute("number") + ": " + xmlReader.GetAttribute("color") + ": " + xmlReader.GetAttribute("enabled"));
+                            TextBox textbox = textBoxListe.Find(x => x.Name == xmlReader.GetAttribute("name"));
+                            textbox.Name = xmlReader.GetAttribute("name");
+                            textbox.Text = xmlReader.GetAttribute("number");
+                            Int32 argb = Convert.ToInt32(xmlReader.GetAttribute("color"));
+                            Color color = Color.FromArgb(argb);
+                            textbox.BackColor = color;
+                            textbox.Enabled = Convert.ToBoolean(xmlReader.GetAttribute("enabled"));
+                            if (argb == -7278960)
+                            {
+                                textbox.Enabled = true;
+                            }
+                        }
+                        if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "bool"))
+                        {
+                            Console.WriteLine(xmlReader.GetAttribute("bool"));
+                            bool boolload = Convert.ToBoolean(xmlReader.GetAttribute("bool"));
+                            boollist.Add(boolload);
+                        }
+                    }
+                    xmlReader.Close();
+                }
+            }
+        }
+
+        private void checkHomeFolder()
+        {
+            string currentDirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent");
+            if (Directory.Exists(currentDirectoryPath))
+            {
+                Console.WriteLine($"Directory {currentDirectoryPath} exists!");
+            }
+            else
+            {
+                Console.WriteLine($"Directory {currentDirectoryPath} does not exist!");
+                System.IO.Directory.CreateDirectory(currentDirectoryPath);
+                System.IO.Directory.CreateDirectory(Path.Combine(currentDirectoryPath, "savegames"));
+                System.IO.Directory.CreateDirectory(Path.Combine(currentDirectoryPath, "muster"));
+
+
+                string musterVorlagenPath = Path.Combine(Directory.GetCurrentDirectory(), "muster");
+                string fileName = "";
+                string destFile = "";
+                string[] files = System.IO.Directory.GetFiles(musterVorlagenPath);
+                foreach (string s in files)
+                {
+                    fileName = System.IO.Path.GetFileName(s);
+                    destFile = System.IO.Path.Combine(Path.Combine(currentDirectoryPath, "muster"), fileName);
+                    System.IO.File.Copy(s, destFile);
+                }
+                Console.WriteLine($"Directory {currentDirectoryPath} created!");
+            }
+
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Schnellspeichern
+
+
+
+
 
         }
     }
 }
+    

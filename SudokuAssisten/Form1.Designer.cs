@@ -38,10 +38,10 @@ namespace sudoku_assistent_002
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -51,8 +51,8 @@ namespace sudoku_assistent_002
             this.buttonVorlageLaden = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -61,10 +61,10 @@ namespace sudoku_assistent_002
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Location = new System.Drawing.Point(11, 22);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button1.Location = new System.Drawing.Point(16, 34);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 27);
+            this.button1.Size = new System.Drawing.Size(195, 42);
             this.button1.TabIndex = 5;
             this.button1.Text = "Muster setzen";
             this.button1.UseVisualStyleBackColor = false;
@@ -74,10 +74,9 @@ namespace sudoku_assistent_002
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(29, 21);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(44, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 15);
+            this.label1.Size = new System.Drawing.Size(0, 20);
             this.label1.TabIndex = 4;
             this.label1.Visible = false;
             // 
@@ -89,10 +88,10 @@ namespace sudoku_assistent_002
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.SteelBlue;
-            this.button3.Location = new System.Drawing.Point(11, 20);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button3.Location = new System.Drawing.Point(16, 31);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(130, 27);
+            this.button3.Size = new System.Drawing.Size(195, 42);
             this.button3.TabIndex = 7;
             this.button3.Text = "Neues Spiel";
             this.button3.UseVisualStyleBackColor = false;
@@ -101,10 +100,10 @@ namespace sudoku_assistent_002
             // buttonSpeichern
             // 
             this.buttonSpeichern.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonSpeichern.Location = new System.Drawing.Point(11, 55);
-            this.buttonSpeichern.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonSpeichern.Location = new System.Drawing.Point(16, 85);
+            this.buttonSpeichern.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSpeichern.Name = "buttonSpeichern";
-            this.buttonSpeichern.Size = new System.Drawing.Size(130, 27);
+            this.buttonSpeichern.Size = new System.Drawing.Size(195, 42);
             this.buttonSpeichern.TabIndex = 8;
             this.buttonSpeichern.Text = "Spiel Speichern";
             this.buttonSpeichern.UseVisualStyleBackColor = false;
@@ -113,10 +112,10 @@ namespace sudoku_assistent_002
             // buttonLaden
             // 
             this.buttonLaden.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonLaden.Location = new System.Drawing.Point(11, 86);
-            this.buttonLaden.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonLaden.Location = new System.Drawing.Point(16, 132);
+            this.buttonLaden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonLaden.Name = "buttonLaden";
-            this.buttonLaden.Size = new System.Drawing.Size(130, 27);
+            this.buttonLaden.Size = new System.Drawing.Size(195, 42);
             this.buttonLaden.TabIndex = 9;
             this.buttonLaden.Text = "Spiel Laden";
             this.buttonLaden.UseVisualStyleBackColor = false;
@@ -128,11 +127,11 @@ namespace sudoku_assistent_002
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.buttonSpeichern);
             this.groupBox1.Controls.Add(this.buttonLaden);
-            this.groupBox1.Location = new System.Drawing.Point(0, 79);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox1.Location = new System.Drawing.Point(0, 122);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox1.Size = new System.Drawing.Size(150, 124);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox1.Size = new System.Drawing.Size(225, 191);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Spielstand laden/speichern";
@@ -140,10 +139,10 @@ namespace sudoku_assistent_002
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Location = new System.Drawing.Point(11, 25);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button2.Location = new System.Drawing.Point(16, 38);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(130, 27);
+            this.button2.Size = new System.Drawing.Size(195, 42);
             this.button2.TabIndex = 10;
             this.button2.Text = "Schnell Speichern";
             this.button2.UseVisualStyleBackColor = false;
@@ -154,69 +153,65 @@ namespace sudoku_assistent_002
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.groupBox1);
             this.groupBox2.Controls.Add(this.groupBox4);
-            this.groupBox2.Location = new System.Drawing.Point(561, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox2.Location = new System.Drawing.Point(842, 0);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox2.Size = new System.Drawing.Size(150, 376);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox2.Size = new System.Drawing.Size(225, 578);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Location = new System.Drawing.Point(0, 12);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox4.Size = new System.Drawing.Size(225, 102);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Neues Spiel";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 419);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(12, 626);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 15);
+            this.label2.Size = new System.Drawing.Size(180, 20);
             this.label2.TabIndex = 14;
             this.label2.Text = "Keine Datei ausgewählt.";
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.checkBox1);
-            this.groupBox5.Location = new System.Drawing.Point(561, 371);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox5.Location = new System.Drawing.Point(842, 571);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox5.Size = new System.Drawing.Size(150, 49);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox5.Size = new System.Drawing.Size(225, 75);
             this.groupBox5.TabIndex = 13;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Auto-Ausfüllen";
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(10, 23);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox1.Location = new System.Drawing.Point(15, 35);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(107, 19);
+            this.checkBox1.Size = new System.Drawing.Size(140, 24);
             this.checkBox1.TabIndex = 13;
             this.checkBox1.Text = "Auto-Ausfüllen";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Location = new System.Drawing.Point(0, 8);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox4.Size = new System.Drawing.Size(150, 66);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Neues Spiel";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Location = new System.Drawing.Point(561, 311);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox3.Location = new System.Drawing.Point(842, 478);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox3.Size = new System.Drawing.Size(150, 65);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox3.Size = new System.Drawing.Size(225, 100);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Muster setzen";
@@ -227,11 +222,11 @@ namespace sudoku_assistent_002
             this.groupBox6.Controls.Add(this.groupBox7);
             this.groupBox6.Controls.Add(this.buttonVorlageSpeichern);
             this.groupBox6.Controls.Add(this.buttonVorlageLaden);
-            this.groupBox6.Location = new System.Drawing.Point(561, 208);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox6.Location = new System.Drawing.Point(842, 320);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox6.Size = new System.Drawing.Size(150, 97);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox6.Size = new System.Drawing.Size(225, 149);
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Vorlage laden/speichern";
@@ -241,31 +236,31 @@ namespace sudoku_assistent_002
             this.groupBox7.BackColor = System.Drawing.Color.Transparent;
             this.groupBox7.Controls.Add(this.button7);
             this.groupBox7.Controls.Add(this.button8);
-            this.groupBox7.Location = new System.Drawing.Point(0, 103);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox7.Location = new System.Drawing.Point(0, 158);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox7.Size = new System.Drawing.Size(150, 97);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.groupBox7.Size = new System.Drawing.Size(225, 149);
             this.groupBox7.TabIndex = 12;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Spielstand laden/speichern";
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(11, 29);
-            this.button7.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button7.Location = new System.Drawing.Point(16, 45);
+            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(130, 27);
+            this.button7.Size = new System.Drawing.Size(195, 42);
             this.button7.TabIndex = 8;
             this.button7.Text = "Spiel Speichern";
             this.button7.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(11, 59);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button8.Location = new System.Drawing.Point(16, 91);
+            this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(130, 27);
+            this.button8.Size = new System.Drawing.Size(195, 42);
             this.button8.TabIndex = 9;
             this.button8.Text = "Spiel Laden";
             this.button8.UseVisualStyleBackColor = true;
@@ -273,10 +268,10 @@ namespace sudoku_assistent_002
             // buttonVorlageSpeichern
             // 
             this.buttonVorlageSpeichern.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonVorlageSpeichern.Location = new System.Drawing.Point(11, 29);
-            this.buttonVorlageSpeichern.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonVorlageSpeichern.Location = new System.Drawing.Point(16, 45);
+            this.buttonVorlageSpeichern.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonVorlageSpeichern.Name = "buttonVorlageSpeichern";
-            this.buttonVorlageSpeichern.Size = new System.Drawing.Size(130, 27);
+            this.buttonVorlageSpeichern.Size = new System.Drawing.Size(195, 42);
             this.buttonVorlageSpeichern.TabIndex = 8;
             this.buttonVorlageSpeichern.Text = "Vorlage Speichern";
             this.buttonVorlageSpeichern.UseVisualStyleBackColor = false;
@@ -285,10 +280,10 @@ namespace sudoku_assistent_002
             // buttonVorlageLaden
             // 
             this.buttonVorlageLaden.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonVorlageLaden.Location = new System.Drawing.Point(11, 59);
-            this.buttonVorlageLaden.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonVorlageLaden.Location = new System.Drawing.Point(16, 91);
+            this.buttonVorlageLaden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonVorlageLaden.Name = "buttonVorlageLaden";
-            this.buttonVorlageLaden.Size = new System.Drawing.Size(130, 27);
+            this.buttonVorlageLaden.Size = new System.Drawing.Size(195, 42);
             this.buttonVorlageLaden.TabIndex = 9;
             this.buttonVorlageLaden.Text = "Vorlage Laden";
             this.buttonVorlageLaden.UseVisualStyleBackColor = false;
@@ -296,26 +291,27 @@ namespace sudoku_assistent_002
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
-            this.ClientSize = new System.Drawing.Size(717, 443);
+            this.ClientSize = new System.Drawing.Size(1076, 664);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
-            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Sudoku";
             this.Load += new System.EventHandler(this.Form1_Load_1);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);

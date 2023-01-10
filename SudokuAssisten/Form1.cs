@@ -350,6 +350,10 @@ namespace sudoku_assistent_002
             {
                 boollist[i] = true;
             }
+            for (int i = 0; i < 81; i++)
+            {
+                stringlist[i] = "";
+            }
             foreach (TextBox box in textBoxListe)
             {
                 box.Text = "";
@@ -628,14 +632,10 @@ namespace sudoku_assistent_002
             
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-
-        }
-
-        private void groupBox5_Enter(object sender, EventArgs e)
-        {
-
+            this.ActiveControl = null;
+            Hide_popup();
         }
     }
 }

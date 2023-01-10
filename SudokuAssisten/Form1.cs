@@ -54,7 +54,25 @@ namespace sudoku_assistent_002
             }
             if (temp.Length == 2 && box.Text == "")
             {
-                stringlist[count] = "y";
+                int count2 = 0;
+                foreach (TextBox textbox in textBoxListe)
+                {
+                    int[] possibles2 = Get_Possibles(textbox);
+                    string temp2 = "";
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (possibles2[i] != 0)
+                        {
+                            temp2 = temp2 + Convert.ToString(possibles2[i]);
+                        }
+                    }
+                    if (temp == temp2  && textbox.Text == "")
+                    {
+                        stringlist[count2] = "y";
+                        stringlist[count] = "y";
+                    }
+                    count2++;
+                }
             }
         }
 

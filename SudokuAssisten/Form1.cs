@@ -18,6 +18,7 @@ namespace sudoku_assistent_002
         List<TextBox> textBoxListe = new List<TextBox>();
         List<Boolean> boollist = new List<Boolean>();
         List<String> stringlist = new List<String>();
+        String savePath = "";
         public Form1()
         {
             InitializeComponent();
@@ -338,6 +339,8 @@ namespace sudoku_assistent_002
 
         private void button3_Click(object sender, EventArgs e)
         {
+            savePath = "Keine Datei ausgewählt.";
+            label2.Text = savePath;
             button1.Visible = true;
 
             for (int i = 0; i < 81; i++)
@@ -358,25 +361,17 @@ namespace sudoku_assistent_002
             Generate();
         }
 
-        private void buttonSpeichern_Click_1(object sender, EventArgs e)
+        private void saveGame()
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
-            saveFileDialog1.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent\\savegames");
-            saveFileDialog1.Filter = "xml files (*.xml)|*.xml";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (savePath != "")
             {
-                
                 XmlWriter oXmlWriter = null;
                 XmlWriterSettings oXmlWriterSettings = new XmlWriterSettings();
 
                 oXmlWriterSettings.Indent = true;
                 oXmlWriterSettings.IndentChars = "  ";
                 oXmlWriterSettings.NewLineChars = "\r\n";
-                oXmlWriter = XmlWriter.Create(saveFileDialog1.FileName, oXmlWriterSettings);
+                oXmlWriter = XmlWriter.Create(savePath, oXmlWriterSettings);
                 oXmlWriter.WriteStartDocument(true);
                 oXmlWriter.WriteStartElement("textboxes");
                 foreach (TextBox forElement in textBoxListe)
@@ -401,9 +396,33 @@ namespace sudoku_assistent_002
                 oXmlWriter.WriteEndElement();
                 Console.WriteLine("Die XML-Datei wurde geschrieben!");
                 oXmlWriter.Close();
-                   
-                
             }
+            else
+            {
+                saveDialog();
+            }
+        }
+
+        private void saveDialog()
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent\\savegames");
+            saveFileDialog1.Filter = "xml files (*.xml)|*.xml";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                savePath = saveFileDialog1.FileName;
+                pfadLabel();
+                saveGame();
+            }
+        }
+
+        private void buttonSpeichern_Click_1(object sender, EventArgs e)
+        {
+            saveDialog();
         }
 
         private void buttonLaden_Click(object sender, EventArgs e)
@@ -421,6 +440,8 @@ namespace sudoku_assistent_002
                 {
                     //Get the path of specified file
                     filePath = openFileDialog.FileName;
+                    savePath = filePath;
+                    pfadLabel();
 
                     //ReadFile
                     XmlReader xmlReader = XmlReader.Create(filePath);
@@ -456,6 +477,8 @@ namespace sudoku_assistent_002
 
         private void buttonVorlageSpeichern_Click(object sender, EventArgs e)
         {
+            savePath = "";
+            label2.Text = "Keine Datei ausgewählt.";
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SudokuAssistent\\muster");
@@ -504,6 +527,8 @@ namespace sudoku_assistent_002
 
         private void buttonVorlageLaden_Click(object sender, EventArgs e)
         {
+            savePath = "";
+            label2.Text = "Keine Datei ausgewählt.";
             //Get File
             var fileContent = string.Empty;
             var filePath = string.Empty;
@@ -585,11 +610,19 @@ namespace sudoku_assistent_002
         private void button2_Click(object sender, EventArgs e)
         {
             //Schnellspeichern
+            saveGame();
+        }
 
-
-
-
-
+        private void pfadLabel()
+        {
+            char[] pathArray = savePath.ToCharArray();
+            Array.Reverse(pathArray);
+            String currPathRev = new string(pathArray);
+            string[] currFolder = currPathRev.Split('\\');
+            char[] folderArray = currFolder[0].ToCharArray();
+            Array.Reverse(folderArray);
+            label2.Text = new string(folderArray);
+            
         }
     }
 }

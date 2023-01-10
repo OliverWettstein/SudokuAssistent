@@ -1,4 +1,3 @@
-﻿
 namespace sudoku_assistent_002
 {
     partial class Form1
@@ -21,7 +20,7 @@ namespace sudoku_assistent_002
             base.Dispose(disposing);
         }
 
-        #region Vom Windows Form-Designer generierter Code
+       #region Vom Windows Form-Designer generierter Code
 
         /// <summary>
         /// Erforderliche Methode für die Designerunterstützung.
@@ -49,6 +48,7 @@ namespace sudoku_assistent_002
             this.button8 = new System.Windows.Forms.Button();
             this.buttonVorlageSpeichern = new System.Windows.Forms.Button();
             this.buttonVorlageLaden = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -147,6 +147,7 @@ namespace sudoku_assistent_002
             this.button2.Text = "Schnell Speichern";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.groupBox2.Controls.Add(this.label2);
             // 
             // groupBox2
             // 
@@ -283,6 +284,16 @@ namespace sudoku_assistent_002
             this.buttonVorlageLaden.UseVisualStyleBackColor = false;
             this.buttonVorlageLaden.Click += new System.EventHandler(this.buttonVorlageLaden_Click);
             // 
+            // Label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 392);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 15);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Keine Datei ausgewählt.";
+            
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -330,8 +341,8 @@ namespace sudoku_assistent_002
         private System.Windows.Forms.Button buttonVorlageSpeichern;
         private System.Windows.Forms.Button buttonVorlageLaden;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox groupBox5;
     }
 }
-
